@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    username: avnadmin
+    url: jdbc:postgresql://pg-22858851-vebsrocks6693-462c.a.aivencloud.com:13302/postDb
+    driverClassName: org.postgresql.Driver
+    password: AVNS_6t2kV2IWjpDzBpVd4_t
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    changeLog: classpath:/db/changelog/db.changelog-master.xml
+keycloak:
+  enabled: true
+  auth-server-url: http://auth-server:8080
+  credentials:
+    secret: JcmhO2dvvonASJDmRfLpw4ikTHIu1tXv
+  ssl-required: external
+  realm: techbee
+  resource: post_service_client
+  bearer-only: true
+  use-resource-role-mappings: false
