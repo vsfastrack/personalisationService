@@ -70,11 +70,11 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-//
+
 //task generateChangeSetsFromDb(type: JavaExec) {
 //	main = 'liquibase.integration.commandline.Main'
 //	classpath = sourceSets.main.runtimeClasspath
-//	args "--url=jdbc:postgresql://localhost:5432/techbeeDb"
+//	args "--url=jdbc:postgresql://localhost:5432/profileDb"
 //	args "--username=postgres"
 //	args "--password=admin12345"
 //	args "--driver=org.postgresql.Driver"

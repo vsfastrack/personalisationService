@@ -1,28 +1,8 @@
 spring:
   application:
-    name: postService
-  datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/postDb
-    driverClassName: org.postgresql.Driver
-    password: admin12345
-  jpa:
-    hibernate:
-      ddl-auto: none
-  liquibase:
-    changeLog: classpath:/db/changelog/db.changelog-master.xml
+    name: profileService
 server:
-  port: 8081
-keycloak:
-  enabled: true
-  auth-server-url: http://localhost:8080
-  credentials:
-    secret: tbuAfRnjtQlEobZBF7dy7NApy5dlF8JE
-  ssl-required: external
-  realm: techbee
-  resource: post_service_client
-  bearer-only: true
-  use-resource-role-mappings: false
+  port: 8086
 logbook:
   format:
     style: http
@@ -40,5 +20,3 @@ management:
       web:
         exposure:
           include: '*'
-  liquibase:
-    changeLog: classpath:/db/changelog/db.changelog-master.xml
