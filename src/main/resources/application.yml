@@ -42,3 +42,7 @@ management:
           include: '*'
   liquibase:
     changeLog: classpath:/db/changelog/db.changelog-master.xml
+aws:
+  secretKey:
+  accessKey:
+  region:
