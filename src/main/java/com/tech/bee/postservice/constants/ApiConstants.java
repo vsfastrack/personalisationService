@@ -31,6 +31,10 @@ public class ApiConstants {
         public static final String KEY_REACTION="reaction";
         public static final String KEY_SERIES="series";
         public static final String KEY_USER="user";
+        public static final String KEY_FIRST_NAME="firstName";
+        public static final String KEY_LAST_NAME="lastName";
+        public static final String KEY_EMAIL="email";
+        public static final String KEY_PROFILE="profile";
     }
 
     public static final class RoleConstants{

@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,9 +22,10 @@ public class ProfileEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String profileIdentifier = UUID.randomUUID().toString();
+    @Column(nullable = false)
+    private String userId;
     private String firstName;
     private String lastName;
-    private String fullName;
     private String email;
     private String profilePicPath;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -52,4 +51,8 @@ public class ProfileEntity {
     private LocalDateTime createdWhen;
     @UpdateTimestamp
     private LocalDateTime lastModified;
+    public String getFullName(){
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append(this.getFullName()).append(" ").append(this.getLastName()).toString();
+    }
 }

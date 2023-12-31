@@ -41,9 +41,9 @@ keycloak:
   enabled: true
   auth-server-url: ${KEYCLOAK_URL:http://localhost:8080}
   credentials:
-    secret: ${KEYCLOAK_CLIENT_SECRET:qcVavgKeDhCQ526Lhlbr4fsZsP7C7xq5}
+    secret: ${KEYCLOAK_CLIENT_SECRET:PFiGg92KVDWQUJXiHqrESNyNgpLG9LcP}
   ssl-required: external
   realm: ${KEYCLOAK_REALM:techbee}
-  resource: post_service_client
+  resource: personalisation_client
   bearer-only: true
   use-resource-role-mappings: false

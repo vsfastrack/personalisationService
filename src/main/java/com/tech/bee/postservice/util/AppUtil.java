@@ -4,15 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tech.bee.postservice.common.ErrorDTO;
 import com.tech.bee.postservice.constants.ApiConstants;
+import com.tech.bee.postservice.entity.InterestEntity;
 import com.tech.bee.postservice.enums.Enums;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @UtilityClass
@@ -73,6 +79,20 @@ public class AppUtil {
                 log.error("Error occurred while merging beans {}", ExceptionUtils.getMessage(exception));
             }
         });
+    }
+
+    public LocalDate convertStringToLocalDate(String date){
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(date, customFormatter);
+    }
+
+    public String convertToFullName(@NonNull  final String firstName , final String lastName){
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append(firstName).append(" ").append(lastName).toString();
+    }
+
+    public List<String> extractInterests(final Set<InterestEntity> interests){
+        return interests.stream().map(InterestEntity::getName).collect(Collectors.toList());
     }
 
     public static String getAsJsonString(Object object){
