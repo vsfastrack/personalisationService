@@ -53,6 +53,6 @@ public class ProfileEntity {
     private LocalDateTime lastModified;
     public String getFullName(){
         StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(this.getFullName()).append(" ").append(this.getLastName()).toString();
+        return stringBuilder.append(this.getFirstName()).append(" ").append(this.getLastName()).toString();
     }
 }
