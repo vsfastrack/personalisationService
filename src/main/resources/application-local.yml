@@ -1,14 +1,14 @@
 spring:
   datasource:
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postDb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/profileDb}
     driverClassName: org.postgresql.Driver
     password: ${SPRING_DATASOURCE_PASSWORD:admin12345}
   jpa:
     hibernate:
       ddl-auto: none
   liquibase:
-    changeLog: classpath:/db/changelog/db.changelog-master.xml
+   changeLog: classpath:/db/changelog/db.changelog-master.xml
   data:
     elasticsearch:
       cluster-nodes: localhost:9200
@@ -41,10 +41,10 @@ keycloak:
   enabled: true
   auth-server-url: ${KEYCLOAK_URL:http://localhost:8080}
   credentials:
-    secret: ${KEYCLOAK_CLIENT_SECRET:qcVavgKeDhCQ526Lhlbr4fsZsP7C7xq5}
+    secret: ${KEYCLOAK_CLIENT_SECRET:PFiGg92KVDWQUJXiHqrESNyNgpLG9LcP}
   ssl-required: external
   realm: ${KEYCLOAK_REALM:techbee}
-  resource: post_service_client
+  resource: personalisation_client
   bearer-only: true
   use-resource-role-mappings: false
 aws:

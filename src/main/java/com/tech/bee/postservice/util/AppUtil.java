@@ -4,23 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tech.bee.postservice.common.ErrorDTO;
 import com.tech.bee.postservice.constants.ApiConstants;
-import com.tech.bee.postservice.dto.PostDTO;
-import com.tech.bee.postservice.entity.PostEntity;
+import com.tech.bee.postservice.entity.InterestEntity;
 import com.tech.bee.postservice.enums.Enums;
-import com.tech.bee.postservice.exception.BaseCustomException;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtilsBean;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @UtilityClass
@@ -83,6 +81,20 @@ public class AppUtil {
         });
     }
 
+    public LocalDate convertStringToLocalDate(String date){
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return LocalDate.parse(date, customFormatter);
+    }
+
+    public String convertToFullName(@NonNull  final String firstName , final String lastName){
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append(firstName).append(" ").append(lastName).toString();
+    }
+
+    public List<String> extractInterests(final Set<InterestEntity> interests){
+        return interests.stream().map(InterestEntity::getName).collect(Collectors.toList());
+    }
+
     public static String getAsJsonString(Object object){
         try{
             return objectMapper.writeValueAsString(object);
@@ -90,9 +102,5 @@ public class AppUtil {
             log.error("Exception occurred while parsing input {}",ExceptionUtils.getMessage(exception));
         }
         return null;
-    }
-    public static String publishedOn(PostEntity postEntity){
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d' 'MMM' 'yyyy");
-        return postEntity.getCreatedWhen().format(outputFormatter);
     }
 }

@@ -9,20 +9,21 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
 @NoArgsConstructor
+@Data
 @Entity
-@Table(name = "links")
-public class LinkEntity {
+@Table(name = "interest")
+public class InterestEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "link_id")
-    private String linkId;
-    private String identifier = UUID.randomUUID().toString();
-    private String content;
+    private String interestIdentifier = UUID.randomUUID().toString();
+    private String tagIdentifier;
+    private String name;
     @CreationTimestamp
     private LocalDateTime createdWhen;
     @UpdateTimestamp
-    private LocalDateTime lastModifiedWhen;
+    private LocalDateTime lastModified;
+
 }

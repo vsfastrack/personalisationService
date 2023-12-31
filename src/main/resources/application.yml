@@ -1,36 +1,22 @@
 spring:
   application:
-    name: postService
+    name: profileService
   datasource:
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/postDb
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/profileDb}
     driverClassName: org.postgresql.Driver
-    password: admin12345
+    password: ${SPRING_DATASOURCE_PASSWORD:admin12345}
   jpa:
     hibernate:
       ddl-auto: none
-  liquibase:
-    changeLog: classpath:/db/changelog/db.changelog-master.xml
 server:
-  port: 8081
-keycloak:
-  enabled: true
-  auth-server-url: http://localhost:8080
-  credentials:
-    secret: tbuAfRnjtQlEobZBF7dy7NApy5dlF8JE
-  ssl-required: external
-  realm: techbee
-  resource: post_service_client
-  bearer-only: true
-  use-resource-role-mappings: false
+  port: 8086
 logbook:
   format:
     style: http
 management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
+  health:
+    show-details: always
   metrics:
     export:
       prometheus:
@@ -40,8 +26,6 @@ management:
       web:
         exposure:
           include: '*'
-  liquibase:
-    changeLog: classpath:/db/changelog/db.changelog-master.xml
 aws:
   secretKey:
   accessKey:

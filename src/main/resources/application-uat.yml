@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: avnadmin
-    url: jdbc:postgresql://pg-22858851-vebsrocks6693-462c.a.aivencloud.com:13302/postDb
+    url: jdbc:postgresql://pg-22858851-vebsrocks6693-462c.a.aivencloud.com:13302/profileDb
     driverClassName: org.postgresql.Driver
     password: AVNS_6t2kV2IWjpDzBpVd4_t
   jpa:
