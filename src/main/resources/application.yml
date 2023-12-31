@@ -27,6 +27,8 @@ management:
         exposure:
           include: '*'
 aws:
+  s3:
+    bucket:
   secretKey:
   accessKey:
   region:
