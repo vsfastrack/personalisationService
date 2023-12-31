@@ -2,9 +2,11 @@ package com.tech.bee.postservice.constants;
 
 public class ApiConstants {
     public static final class PathConstants{
-        public static final String PATH_POST_RESOURCE="/api/v1/posts";
-        public static final String PATH_TAG_RESOURCE="/api/v1/tags";
         public static final String PATH_PROFILE_RESOURCE="/api/v1/profile";
+        public static final String PATH_DOCUMENT = "/api/v1/document";
+        public static final String UPLOAD_DOCUMENT = "/upload";
+        public static final String FETCH_DOCUMENT = "/fetch/{key}";
+        public static final String PATH_FETCH_DOC = "/api/v1/fetch/image";
     }
     public static final class ErrorCodeConstants{
         public static final String CODE_FIELD_CANNOT_BE_EMPTY="400.001";

@@ -47,3 +47,7 @@ keycloak:
   resource: personalisation_client
   bearer-only: true
   use-resource-role-mappings: false
+aws:
+  secretKey:
+  accessKey:
+  region:
