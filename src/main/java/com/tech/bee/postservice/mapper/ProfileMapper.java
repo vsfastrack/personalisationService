@@ -31,9 +31,8 @@ public interface ProfileMapper {
     @Mapping(source = "profileEntity.email" , target = "email")
     @Mapping(source = "profileEntity.fullName" , target = "fullName")
     @Mapping(source = "profileEntity.profilePicPath" , target = "profilePicPath")
-    @Mapping(source = "statsDTO" , target = "statsDTO")
     @Mapping( expression = "java(toInterests(profileEntity))" , target = "interests")
-    ProfileDTO toDTO(final ProfileEntity profileEntity , final StatsDTO statsDTO);
+    ProfileDTO toDTO(final ProfileEntity profileEntity);
 
     default LocalDate toDateOfBirth(ProfileDTO profileDTO){
         return AppUtil.convertStringToLocalDate(profileDTO.getDateOfBirth());

@@ -43,7 +43,10 @@ public class ProfileService {
         ProfileEntity profileEntity = profileRepository.findByUserId(securityService.getCurrentLoggedInUser()).orElseThrow(() -> BaseCustomException.builder().
                 errors(Collections.singletonList(AppUtil.buildResourceNotFoundError(ApiConstants.KeyConstants.KEY_PROFILE))).httpStatus(HttpStatus.NOT_FOUND)
                 .build());
-        return profileMapper.toDTO(profileEntity , extractStatistics(profileEntity));
+        ProfileDTO profileDTO = profileMapper.toDTO(profileEntity);
+        StatsDTO statsDTO = extractStatistics(profileEntity);
+        profileDTO.setStatsDTO(statsDTO);
+        return profileDTO;
     }
 
     private StatsDTO extractStatistics(ProfileEntity profileEntity){
