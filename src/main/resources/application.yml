@@ -11,6 +11,8 @@ spring:
       ddl-auto: none
 server:
   port: 8086
+  servlet:
+    context-path: /personalisationService
 logbook:
   format:
     style: http

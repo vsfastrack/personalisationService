@@ -4,13 +4,17 @@ import com.tech.bee.postservice.annotation.RequestMetrics;
 import com.tech.bee.postservice.annotation.TransactionId;
 import com.tech.bee.postservice.common.ApiResponseDTO;
 import com.tech.bee.postservice.constants.ApiConstants;
+import com.tech.bee.postservice.dto.InterestDTO;
 import com.tech.bee.postservice.dto.ProfileDTO;
+import com.tech.bee.postservice.service.InterestService;
 import com.tech.bee.postservice.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileResource {
 
     private final ProfileService profileService;
+    private final InterestService interestService;
 
     @TransactionId
     @RequestMetrics
@@ -34,4 +39,14 @@ public class ProfileResource {
     public ResponseEntity<ApiResponseDTO> find(){
         return new ResponseEntity<>(ApiResponseDTO.builder().content(profileService.find()).build() ,HttpStatus.OK);
     }
+
+    @TransactionId
+    @RequestMetrics
+    @PostMapping(value = "/{profileId}/interests")
+    public ResponseEntity<ApiResponseDTO> saveInterests(@PathVariable("profileId") final String profileId ,
+                                                        @RequestBody List<InterestDTO> interests){
+        interestService.createInterests(profileId , interests);
+        return new ResponseEntity<>(ApiResponseDTO.builder().build(), HttpStatus.NO_CONTENT);
+    }
+
 }

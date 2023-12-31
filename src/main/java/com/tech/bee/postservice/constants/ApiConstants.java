@@ -3,6 +3,8 @@ package com.tech.bee.postservice.constants;
 public class ApiConstants {
     public static final class PathConstants{
         public static final String PATH_PROFILE_RESOURCE="/api/v1/profile";
+        public static final String PATH_PREFERENCE_RESOURCE="/api/v1/preferences";
+        public static final String PATH_INTEREST_RESOURCE="/api/v1/interests";
         public static final String PATH_DOCUMENT = "/api/v1/document";
         public static final String UPLOAD_DOCUMENT = "/upload";
         public static final String FETCH_DOCUMENT = "/fetch/{key}";

@@ -26,11 +26,11 @@ public interface ProfileMapper {
     @Mapping( expression = "java(toDateOfBirth(profileDTO))" , target = "dateOfBirth")
     ProfileEntity toEntity(final ProfileDTO profileDTO,final String userId);
 
-    @Mapping(source = "profileEntity.firstName" , target = "firstName")
-    @Mapping(source = "profileEntity.lastName" , target = "lastName")
+    @Mapping(source = "firstName" , target = "firstName")
+    @Mapping(source = "lastName" , target = "lastName")
     @Mapping(source = "profileEntity.email" , target = "email")
-    @Mapping(source = "profileEntity.fullName" , target = "fullName")
-    @Mapping(source = "profileEntity.profilePicPath" , target = "profilePicPath")
+    @Mapping(source = "fullName" , target = "fullName")
+    @Mapping(source = "profilePicPath" , target = "profilePicPath")
     @Mapping( expression = "java(toInterests(profileEntity))" , target = "interests")
     ProfileDTO toDTO(final ProfileEntity profileEntity);
 
