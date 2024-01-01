@@ -21,9 +21,9 @@ public class InterestResource {
 
     @TransactionId
     @RequestMetrics
-    @PostMapping(value = "/{userId}")
+    @GetMapping(value = "/{userId}")
     public ResponseEntity<ApiResponseDTO> fetchInterests(@PathVariable("userId") final String userId){
-//        interestService.createInterests(userId);
-        return new ResponseEntity<>(ApiResponseDTO.builder().build(), HttpStatus.NO_CONTENT);
+        List<String> interests = interestService.findInterests(userId);
+        return new ResponseEntity<>(ApiResponseDTO.builder().content(interests).build(), HttpStatus.OK);
     }
 }
