@@ -28,7 +28,7 @@ management:
           include: '*'
 aws:
   s3:
-    bucket:
-  secretKey:
-  accessKey:
-  region:
+    bucket: techbeeimagebucket
+  secretKey: wNSxzxaUhXVvr7rsdZbWWjBHjb8DzQ4a61R5Ttm9
+  accessKey: AKIA5HGNSUXAVMNY5S4C
+  region: us-east-1

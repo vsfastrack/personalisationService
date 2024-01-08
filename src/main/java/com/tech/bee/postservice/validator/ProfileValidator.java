@@ -21,6 +21,22 @@ public class ProfileValidator {
         return notificationErrors;
     }
 
+    public void validateFileFormat(final String fileName, List<ErrorDTO> notificationErrors) {
+        if (StringUtils.isEmpty(fileName))
+            notificationErrors.add(ErrorDTO.builder()
+                    .code(ApiConstants.ErrorCodeConstants.CODE_FIELD_CANNOT_BE_EMPTY)
+                    .message(ApiConstants.ErrorMsgConstants.MESSAGE_FIELD_CANNOT_BE_EMPTY)
+                    .key(ApiConstants.KeyConstants.KEY_FIRST_NAME)
+                    .category(Enums.ErrorCategory.VALIDATION_ERROR).build());
+        if (StringUtils.isNotEmpty(fileName) && !fileName.contains(".")) {
+            notificationErrors.add(ErrorDTO.builder()
+                    .code(ApiConstants.ErrorCodeConstants.CODE_RESOURCE_NOT_FOUND)
+                    .message(ApiConstants.ErrorMsgConstants.MESSAGE_RESOURCE_NOT_FOUND)
+                    .key(ApiConstants.KeyConstants.KEY_FILE_NAME)
+                    .category(Enums.ErrorCategory.VALIDATION_ERROR).build());
+        }
+    }
+
     public void validateFirstName(final String firstName , List<ErrorDTO> notificationErrors){
         if(StringUtils.isEmpty(firstName))
             notificationErrors.add(ErrorDTO.builder()

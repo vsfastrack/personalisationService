@@ -41,13 +41,15 @@ keycloak:
   enabled: true
   auth-server-url: ${KEYCLOAK_URL:http://localhost:8080}
   credentials:
-    secret: ${KEYCLOAK_CLIENT_SECRET:PFiGg92KVDWQUJXiHqrESNyNgpLG9LcP}
+    secret: ${KEYCLOAK_CLIENT_SECRET:p4xJMVz0AbAZ44t4w5XE3B4HNO2dD4CH}
   ssl-required: external
   realm: ${KEYCLOAK_REALM:techbee}
   resource: personalisation_client
   bearer-only: true
   use-resource-role-mappings: false
 aws:
-  secretKey:
-  accessKey:
-  region:
+  s3:
+    bucket: techbeeimagebucket
+  secretKey: wNSxzxaUhXVvr7rsdZbWWjBHjb8DzQ4a61R5Ttm9
+  accessKey: AKIA5HGNSUXAVMNY5S4C
+  region: us-east-1

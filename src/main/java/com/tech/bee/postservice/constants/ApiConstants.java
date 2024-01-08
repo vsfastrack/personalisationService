@@ -37,6 +37,8 @@ public class ApiConstants {
         public static final String KEY_LAST_NAME="lastName";
         public static final String KEY_EMAIL="email";
         public static final String KEY_PROFILE="profile";
+
+        public static final String KEY_FILE_NAME = "fileName";
     }
 
     public static final class RoleConstants{
