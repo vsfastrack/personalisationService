@@ -5,6 +5,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tech.bee.postservice.common.ErrorDTO;
 import com.tech.bee.postservice.constants.ApiConstants;
 import com.tech.bee.postservice.entity.InterestEntity;
+import com.tech.bee.postservice.entity.ProfileEntity;
 import com.tech.bee.postservice.enums.Enums;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
@@ -95,6 +96,11 @@ public class AppUtil {
     public List<String> extractInterests(final Set<InterestEntity> interests){
         return interests.stream().map(InterestEntity::getName).collect(Collectors.toList());
     }
+
+    public List<String> extractFollowers(final Set<ProfileEntity> followers){
+        return followers.stream().map(ProfileEntity::getProfileIdentifier).collect(Collectors.toList());
+    }
+
 
     public static String getAsJsonString(Object object){
         try{

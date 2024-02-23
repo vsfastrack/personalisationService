@@ -18,6 +18,7 @@ public class ProfileDTO {
     private String profilePic;
     private String profilePicPath;
     private List<String> interests;
+    private List<String> followers;
     private StatsDTO statsDTO;
     private String dateOfBirth;
 }
