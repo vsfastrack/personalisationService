@@ -22,4 +22,16 @@ public class SecurityService {
         }
         return null;
     }
+
+    public List<ErrorDTO> validateOwnership(String userId){
+        List<ErrorDTO> validationErrors = new ArrayList<>();
+        String currentLoggedInUser = getCurrentLoggedInUser();
+        if(!currentLoggedInUser.equals(userId))
+            validationErrors.add(ErrorDTO.builder()
+                    .code(ApiConstants.ErrorCodeConstants.CODE_OPERATION_FORBIDDEN)
+                    .message(ApiConstants.ErrorMsgConstants.MESSAGE_OPERATION_FORBIDDEN)
+                    .key(ApiConstants.KeyConstants.KEY_USER)
+                    .category(Enums.ErrorCategory.BUSINESS_VALIDATION_ERROR).build());
+        return validationErrors;
+    }
 }

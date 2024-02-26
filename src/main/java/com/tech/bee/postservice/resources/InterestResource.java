@@ -1,0 +1,29 @@
+package com.tech.bee.postservice.resources;
+
+import com.tech.bee.postservice.annotation.RequestMetrics;
+import com.tech.bee.postservice.annotation.TransactionId;
+import com.tech.bee.postservice.common.ApiResponseDTO;
+import com.tech.bee.postservice.constants.ApiConstants;
+import com.tech.bee.postservice.service.InterestService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping(value = ApiConstants.PathConstants.PATH_INTEREST_RESOURCE)
+public class InterestResource {
+
+    private final InterestService interestService;
+
+    @TransactionId
+    @RequestMetrics
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<ApiResponseDTO> fetchInterests(@PathVariable("userId") final String userId){
+        List<String> interests = interestService.findInterests(userId);
+        return new ResponseEntity<>(ApiResponseDTO.builder().content(interests).build(), HttpStatus.OK);
+    }
+}

@@ -18,7 +18,8 @@ spring:
 logging:
   level:
     org:
-      keycloak: DEBUG
+      springframework: INFO
+#      keycloak: DEBUG
 #logging:
 #  file:
 #    name: /Users/macvebs/workspace/logging/post-service/logs/app.log

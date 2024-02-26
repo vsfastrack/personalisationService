@@ -49,6 +49,8 @@ public class ProfileService {
         return profileDTO;
     }
 
+
+
     private StatsDTO extractStatistics(ProfileEntity profileEntity){
         if(Objects.nonNull(profileEntity.getStatistics()))
             return statsMapper.toDTO(profileEntity.getStatistics());

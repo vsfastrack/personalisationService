@@ -22,7 +22,7 @@ FROM adoptopenjdk:8-jre-hotspot
 WORKDIR /app
 
 # Copy the JAR file from the build stage
-COPY --from=build /app/build/libs/post-service-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build /app/build/libs/personalisation-service-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Expose the port on which your Spring Boot application listens
 EXPOSE 8081
