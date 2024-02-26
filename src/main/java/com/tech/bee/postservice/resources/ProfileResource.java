@@ -53,7 +53,7 @@ public class ProfileResource {
     @RequestMetrics
     @PostMapping(value = "/{profileId}/follow")
     public ResponseEntity<ApiResponseDTO> follow(@PathVariable("profileId") final String profileId){
-        interestService.follow(profileId);
+        profileService.follow(profileId);
         return new ResponseEntity<>(ApiResponseDTO.builder().build(), HttpStatus.NO_CONTENT);
     }
 }

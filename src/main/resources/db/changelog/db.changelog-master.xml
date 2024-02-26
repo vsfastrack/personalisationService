@@ -1,9 +1,21 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="macvebs (generated)" id="1703914123174-1">
+    <changeSet author="macvebs (generated)" id="1708889092200-1">
         <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-2">
+    <changeSet author="macvebs (generated)" id="1708889092200-2">
+        <createTable tableName="follow_relation">
+            <column name="created_when" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_modified" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="follower_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="followed_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="macvebs (generated)" id="1708889092200-3">
         <createTable tableName="interest">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="interest_pkey"/>
@@ -15,7 +27,7 @@
             <column name="tag_identifier" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-3">
+    <changeSet author="macvebs (generated)" id="1708889092200-4">
         <createTable tableName="profile">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="profile_pkey"/>
@@ -24,24 +36,16 @@
             <column name="date_of_birth" type="date"/>
             <column name="email" type="VARCHAR(255)"/>
             <column name="first_name" type="VARCHAR(255)"/>
-            <column name="full_name" type="VARCHAR(255)"/>
             <column name="last_modified" type="TIMESTAMP WITHOUT TIME ZONE"/>
             <column name="last_name" type="VARCHAR(255)"/>
             <column name="profile_identifier" type="VARCHAR(255)"/>
             <column name="profile_pic_path" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-4">
-        <createTable tableName="profile_followers">
-            <column name="profile_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_followers_pkey"/>
-            </column>
-            <column name="follower_id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_followers_pkey"/>
+            <column name="user_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-5">
+    <changeSet author="macvebs (generated)" id="1708889092200-5">
         <createTable tableName="profile_interests">
             <column name="profile_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="profile_interests_pkey"/>
@@ -51,7 +55,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-6">
+    <changeSet author="macvebs (generated)" id="1708889092200-6">
         <createTable tableName="statistics">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="statistics_pkey"/>
@@ -67,28 +71,22 @@
             <column name="profile_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-7">
+    <changeSet author="macvebs (generated)" id="1708889092200-7">
+        <addPrimaryKey columnNames="followed_id, follower_id" constraintName="follow_relation_pkey" tableName="follow_relation"/>
+    </changeSet>
+    <changeSet author="macvebs (generated)" id="1708889092200-8">
         <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="statistics" constraintName="fk2xu72qtk7y8ebsrv0dfpxtfiv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-8">
-        <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="profile_followers" constraintName="fk9qm66awnqq7mbk01q7290fde1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
+    <changeSet author="macvebs (generated)" id="1708889092200-9">
+        <addForeignKeyConstraint baseColumnNames="followed_id" baseTableName="follow_relation" constraintName="fk3vykt6k48s5078l972ekt50w8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-9">
-        <addForeignKeyConstraint baseColumnNames="follower_id" baseTableName="profile_followers" constraintName="fkba6fjo3e17x644of332t5772g" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
+    <changeSet author="macvebs (generated)" id="1708889092200-10">
+        <addForeignKeyConstraint baseColumnNames="follower_id" baseTableName="follow_relation" constraintName="fk9f7ixjh6vcxf6m8dlwse2uhck" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-10">
+    <changeSet author="macvebs (generated)" id="1708889092200-11">
         <addForeignKeyConstraint baseColumnNames="interest_id" baseTableName="profile_interests" constraintName="fkcgpn96icda9ovcw3nxcn615a0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="interest" validate="true"/>
     </changeSet>
-    <changeSet author="macvebs (generated)" id="1703914123174-11">
+    <changeSet author="macvebs (generated)" id="1708889092200-12">
         <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="profile_interests" constraintName="fkl6bihw5xlah32qbt3i3laqljk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="profile" validate="true"/>
-    </changeSet>
-    <changeSet author="macvebs" id="1">
-        <addColumn tableName="profile">
-            <column name="user_id" type="varchar(255)"/>
-        </addColumn>
-        <addNotNullConstraint tableName="profile" columnName="user_id"/>
-    </changeSet>
-    <changeSet author="macvebs" id="2">
-        <dropColumn tableName="profile" columnName="full_name"/>
     </changeSet>
 </databaseChangeLog>
