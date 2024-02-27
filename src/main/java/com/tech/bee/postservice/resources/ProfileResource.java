@@ -35,6 +35,14 @@ public class ProfileResource {
 
     @TransactionId
     @RequestMetrics
+    @PatchMapping
+    public ResponseEntity<ApiResponseDTO> edit(@RequestBody ProfileDTO profileDTO){
+        profileService.edit(profileDTO);
+        return new ResponseEntity<>(ApiResponseDTO.builder().build() , HttpStatus.NO_CONTENT);
+    }
+
+    @TransactionId
+    @RequestMetrics
     @GetMapping
     public ResponseEntity<ApiResponseDTO> find(){
         return new ResponseEntity<>(ApiResponseDTO.builder().content(profileService.find()).build() ,HttpStatus.OK);

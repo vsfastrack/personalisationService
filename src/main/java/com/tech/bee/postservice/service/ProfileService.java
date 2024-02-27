@@ -45,6 +45,19 @@ public class ProfileService {
         return profileEntity.getProfileIdentifier();
     }
 
+    @Transactional
+    public void edit(ProfileDTO profileDTO){
+        List<ErrorDTO> validationErrors = profileValidator.validate(profileDTO);
+        if(CollectionUtils.isNotEmpty(validationErrors))
+            throw BaseCustomException.builder().errors(validationErrors).httpStatus(HttpStatus.BAD_REQUEST).build();
+        ProfileEntity existingProfile =profileRepository.findByUserId(securityService.getCurrentLoggedInUser()).orElseThrow(() -> BaseCustomException.builder().
+                errors(Collections.singletonList(AppUtil.buildResourceNotFoundError(ApiConstants.KeyConstants.KEY_PROFILE))).httpStatus(HttpStatus.NOT_FOUND)
+                .build());
+        existingProfile.setEmail(profileDTO.getEmail());
+        existingProfile.setFirstName(profileDTO.getFirstName());
+        existingProfile.setLastName(profileDTO.getLastName());
+    }
+
     public ProfileDTO find(){
         ProfileEntity profileEntity = profileRepository.findByUserId(securityService.getCurrentLoggedInUser()).orElseThrow(() -> BaseCustomException.builder().
                 errors(Collections.singletonList(AppUtil.buildResourceNotFoundError(ApiConstants.KeyConstants.KEY_PROFILE))).httpStatus(HttpStatus.NOT_FOUND)
