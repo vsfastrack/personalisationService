@@ -35,17 +35,8 @@ public class ProfileEntity {
             inverseJoinColumns = @JoinColumn(name = "interest_id")
     )
     private Set<InterestEntity> interests = new HashSet<>();
-    @ManyToMany
-    @JoinTable(
-            name = "profile_followers",
-            joinColumns = @JoinColumn(name = "profile_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id")
-    )
-    private Set<ProfileEntity> followers = new HashSet<>();
     @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
     private StatsEntity statistics;
-    @ManyToMany(mappedBy = "followers")
-    private Set<ProfileEntity> following = new HashSet<>();
     private LocalDate dateOfBirth;
     @CreationTimestamp
     private LocalDateTime createdWhen;

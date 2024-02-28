@@ -21,11 +21,11 @@ public class ImageUploadResource {
 
     @PatchMapping(value = ApiConstants.PathConstants.UPLOAD_DOCUMENT)
     public ResponseEntity<ApiResponseDTO> uploadDocument(@RequestBody File file) {
-        return new ResponseEntity<>(ApiResponseDTO.builder().content(s3DocumetServices.uploadDouments(file)).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ApiResponseDTO.builder().content(s3DocumetServices.uploadDocuments(file)).build(), HttpStatus.OK);
     }
 
     @GetMapping(value = ApiConstants.PathConstants.FETCH_DOCUMENT)
-    public ResponseEntity<ApiResponseDTO> uploadDocument(@PathVariable("key") String key) {
+    public ResponseEntity<ApiResponseDTO> fetchDocument(@PathVariable("key") String key) {
         return new ResponseEntity<>(ApiResponseDTO.builder().content(s3DocumetServices.getDocuments(key)).build(), HttpStatus.OK);
     }
 

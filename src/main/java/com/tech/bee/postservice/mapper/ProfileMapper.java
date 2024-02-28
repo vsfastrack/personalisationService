@@ -20,20 +20,18 @@ public interface ProfileMapper {
     @Mapping(source = "profileDTO.email" , target = "email")
     @Mapping(source = "userId" , target = "userId")
     @Mapping(target = "interests", ignore = true)
-    @Mapping(target = "followers", ignore = true)
-    @Mapping(target = "following", ignore = true)
     @Mapping(target = "statistics", ignore = true)
     @Mapping( expression = "java(toDateOfBirth(profileDTO))" , target = "dateOfBirth")
     ProfileEntity toEntity(final ProfileDTO profileDTO,final String userId);
 
-    @Mapping(source = "firstName" , target = "firstName")
-    @Mapping(source = "lastName" , target = "lastName")
+    @Mapping(source = "profileEntity.firstName" , target = "firstName")
+    @Mapping(source = "profileEntity.lastName" , target = "lastName")
     @Mapping(source = "profileEntity.email" , target = "email")
-    @Mapping(source = "fullName" , target = "fullName")
-    @Mapping(source = "profilePicPath" , target = "profilePicPath")
+    @Mapping(source = "profileEntity.fullName" , target = "fullName")
+    @Mapping(source = "profileEntity.profilePicPath" , target = "profilePicPath")
     @Mapping( expression = "java(toInterests(profileEntity))" , target = "interests")
-    @Mapping( expression = "java(toFollowers(profileEntity))" , target = "followers")
-    ProfileDTO toDTO(final ProfileEntity profileEntity);
+    @Mapping( source = "followers" , target = "followers")
+    ProfileDTO toDTO(final ProfileEntity profileEntity , final List<String> followers);
 
     default LocalDate toDateOfBirth(ProfileDTO profileDTO){
         return AppUtil.convertStringToLocalDate(profileDTO.getDateOfBirth());
@@ -41,10 +39,6 @@ public interface ProfileMapper {
 
     default List<String> toInterests(ProfileEntity profile){
         return AppUtil.extractInterests(profile.getInterests());
-    }
-
-    default List<String> toFollowers(ProfileEntity profile){
-        return AppUtil.extractFollowers(profile.getFollowers());
     }
 
     default String toFullName(final String firstName,final String lastName){

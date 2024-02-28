@@ -25,7 +25,7 @@ public class S3DocServices {
         return amazonS3Client.getObject(new GetObjectRequest(bucketName, key));
     }
 
-    public String uploadDouments(File file) {
+    public String uploadDocuments(File file) {
         String key = file.getName() + RandomUtils.nextInt();
         amazonS3Client.putObject(bucketName, key, file);
         return StringUtils.replace(BUCKET_URL, bucketName, key);

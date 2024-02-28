@@ -53,24 +53,6 @@ public class InterestService {
         return interests.stream().map(InterestEntity::getTagIdentifier).collect(Collectors.toList());
     }
 
-    @Transactional
-    public void follow(final String followedProfileId){
-        ProfileEntity followedProfile = profileRepository.findByProfileIdentifier(followedProfileId).orElseThrow(() -> BaseCustomException.builder().
-                errors(Collections.singletonList(AppUtil.buildResourceNotFoundError(ApiConstants.KeyConstants.KEY_PROFILE))).httpStatus(HttpStatus.NOT_FOUND)
-                .build());
-        final String currentUserId = securityService.getCurrentLoggedInUser();
-        ProfileEntity followerProfile = profileRepository.findByUserId(currentUserId).orElseThrow(() -> BaseCustomException.builder().
-                errors(Collections.singletonList(AppUtil.buildResourceNotFoundError(ApiConstants.KeyConstants.KEY_PROFILE))).httpStatus(HttpStatus.NOT_FOUND)
-                .build());
-        if(CollectionUtils.isEmpty(followedProfile.getFollowers())){
-            Set<ProfileEntity> followers = new HashSet<>();
-            followers.add(followerProfile);
-            followedProfile.setFollowers(followers);
-            return;
-        }
-        followedProfile.getFollowers().add(followerProfile);
-    }
-
     private List<InterestEntity> mapToInterestEntity(List<InterestDTO> interests){
         return interests.stream().map(interestMapper::toEntity).collect(Collectors.toList());
     }
