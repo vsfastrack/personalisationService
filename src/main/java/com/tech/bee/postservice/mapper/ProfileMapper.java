@@ -29,6 +29,7 @@ public interface ProfileMapper {
     @Mapping(source = "profileEntity.email" , target = "email")
     @Mapping(source = "profileEntity.fullName" , target = "fullName")
     @Mapping(source = "profileEntity.profilePicPath" , target = "profilePicPath")
+    @Mapping(source = "profileEntity.profileIdentifier" , target = "identifier")
     @Mapping( expression = "java(toInterests(profileEntity))" , target = "interests")
     @Mapping( source = "followers" , target = "followers")
     ProfileDTO toDTO(final ProfileEntity profileEntity , final List<String> followers);
